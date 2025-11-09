@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title>Almacén</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-bg">
+
+  <div class="page-wrapper">
+
+    <form [formGroup]="discoForm">
+      <ion-item>
+        <ion-input placeholder="Brand" formControlName="brand"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input placeholder="Model" formControlName="model"></ion-input>
+      </ion-item>
+
+      <ion-button class="guardar-btn" (click)="guardar()">
+        Guardar disco
+      </ion-button>
+    </form>
+
+    <hr>
+
+    <ion-list>
+      <ion-item *ngFor="let d of discos">
+        <ion-label>
+          <h1 class="disc-brand">{{ d.brand }}</h1>
+          <p class="disc-model">{{ d.model }}</p>
+        </ion-label>
+
+        <ion-button class="btn-action" (click)="editarDisco(d)">
+          EDITAR
+        </ion-button>
+
+        <ion-button class="btn-action" (click)="deleteDisco(d.id)">
+          BORRAR
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+</ion-content>
+
+

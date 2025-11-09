@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+
+.home-bg {
+  --background: #e6e6e6; /* gris claro */
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.titulo {
+  font-family: 'Metal Mania', cursive;
+  font-size: 34px;
+  font-weight: 700;
+  color: #b30000; /* rojo gótico */
+  margin-bottom: 20px;
+}
+
+.portada {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+/* botón estilo sangre */
+.btn-ir {
+  width: 80%;
+  max-width: 300px;
+  --background: #8b0000;
+  --color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+}

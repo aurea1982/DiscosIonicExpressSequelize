@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+
+/* fondo gris */
+.home-bg {
+  --background: #e6e6e6;
+}
+
+/* limita tamaño como móvil */
+ion-content {
+  display: flex;
+  justify-content: center;
+}
+
+.page-wrapper {
+  width: 100%;
+  max-width: 420px;   /* tamaño de móvil */
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* toolbar con imagen */
+.top-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* items */
+ion-item {
+  margin-bottom: 6px;
+  --background: white;
+  border-radius: 6px;
+}
+
+/* botón guardar pequeño */
+.guardar-btn {
+  --background: #8b0000;
+  --color: #efefef;
+  width: 60%;
+  margin: 10px auto;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* estilos texto */
+.disc-brand {
+  font-family: 'Metal Mania', cursive;
+  font-size: 20px;
+  color: #8b0000;
+}
+
+.disc-model {
+  font-size: 14px;
+  color: #333333;
+}
+
+/* botones editar y borrar */
+.btn-action {
+  --background: #8b0000;
+  --color: #efefef;
+  font-size: 12px;
+  height: 26px;
+  margin-left: 6px;
+  border-radius: 4px;
+}
