@@ -1,24 +1,46 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="light">
-    <ion-title>Inicio</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<!--este tipo de estructura es la general de ionic, empleo un contenedor principal para el contenido de la pagina, y emprelo el css para el fondo-->
 <ion-content class="home-bg">
+  <!--esto es el contenedor principal conde voya aplicar los estilos-->
+  <div class="contenedor-principal">
+    <!-- empleo el ion-card que fue lo que nos indican para que podamos mostrarlo dentro del movil con imagen de movil-->
+    <ion-card class="card-contenedor">
+      <!-- muestra el titulo que es Inicio y decorado con CSS-->
+      <ion-card-header>
+        <ion-card-title class="titulo-header">Inicio</ion-card-title>
+      </ion-card-header>
+      <!--dentro de este contenido va lo que hace referencia a mi HomePage con el estilo CSS-->
+      <ion-card-content>
+        <div class="contenedor-central">
+          <h1 class="titulo">TIENDA DISCOS HEAVY</h1>
+          <!--para que pueda usar una imagen dentro del ionic tengo que metarla en la carpeta assets/imagenes y que sea jpg-->
+          <img src="assets/imagenes/heavy.jpg" class="imagen-vinilo">
 
-  <div class="center-container">
+          <!--estoy creando una boton por cada estilo de musica que voy a poner y tiene en cuenta el estilo de CSS-->
+          <ion-button class="btn-metal" expand="block" routerLink="/heavy-clasico">
+            HEAVY CLÁSICO
+          </ion-button>
 
-    <h1 class="titulo">TIENDA DISCOS HEAVY</h1>
+          <ion-button class="btn-metal" expand="block" routerLink="/black-metal">
+            BLACK METAL
+          </ion-button>
 
-    <img class="portada" src="assets/imagenes/heavy.jpg" alt="heavy metal">
+          <ion-button class="btn-metal" expand="block" routerLink="/death-metal">
+            DEATH METAL
+          </ion-button>
 
-    <ion-button expand="block" class="btn-ir" (click)="gotoMyDiscos()">
-      Almacén
-    </ion-button>
+          <ion-button class="btn-metal" expand="block" routerLink="/thrash-metal">
+            THRASH METAL
+          </ion-button>
+
+          <ion-button class="btn-metal" expand="block" routerLink="/doom-metal">
+            DOOM METAL
+          </ion-button>
+
+        </div>
+      </ion-card-content>
+
+    </ion-card>
 
   </div>
 
 </ion-content>
-
-
-

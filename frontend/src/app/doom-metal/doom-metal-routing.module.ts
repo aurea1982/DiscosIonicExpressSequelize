@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { MyDiscosPage } from './my-discos.page';
+import { RouterModule, Routes } from '@angular/router';
+import { DoomMetalPage } from './doom-metal.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MyDiscosPage
+    component: DoomMetalPage
   }
 ];
 
@@ -14,4 +13,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MyDiscosPageRoutingModule {}
+export class DoomMetalPageRoutingModule {}
+

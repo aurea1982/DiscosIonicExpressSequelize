@@ -23,3 +23,4 @@ Necesitas tener instalado:
 cd backend
 npm install
 npm start
+

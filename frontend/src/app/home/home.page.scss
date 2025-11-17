@@ -1,41 +1,116 @@
+
+// he decidido por una fuente gotica y he buscado y me ofrece "Metal Mania"
+// para poder usarla tengo que importarla para eso importo el url que me permite usarla
+// carga la fuente desde google fonts
 @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
 
+// esto especifica como quiero el fondo general 
+// centra todo dentro de ion-content
 .home-bg {
-  --background: #e6e6e6; /* gris claro */
+  --background: #2b2b2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.center-container {
+
+.contenedor-principal {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100%;
+}
+
+// crea el estilo del card-contenedor 
+// border-radius me permite bordes redondeadoss
+ion-card.card-contenedor {
+  --background: #bfbfbf;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
   text-align: center;
+  // sombra roja para darle estetica de metal
+  box-shadow: 0 4px 16px rgba(255, 0, 0, 0.4);
+}
+
+//  cabecera de la card de ionic
+ion-card-header {
+  background: #bfbfbf;
+  border-bottom: 2px solid #8b0000;
+  // me permite redondar la parte superior izq
+  border-top-left-radius: 16px;
+  // y esta la deracha
+  border-top-right-radius: 16px;
+  // agrega espacio interior entre el contenido y los bordes
+  // sin esto el titulo estaria pegado a los bordes
+  padding: 12px;
+}
+
+// estilo del titulo de la cabecera
+.titulo-header {
+  // empleo el tipo de letra que importo del google fonts 
+  font-family: 'Metal Mania', cursive;
+  font-size: 22px;
+  color: #b30000;
+  // centra el texto
+  text-align: center;
+}
+
+// añade espacios entre el contenido del card de ionic
+.contenedor-central {
   padding: 20px;
 }
 
+// titulo con tipo de letra que importo 
 .titulo {
   font-family: 'Metal Mania', cursive;
-  font-size: 34px;
-  font-weight: 700;
-  color: #b30000; /* rojo gótico */
-  margin-bottom: 20px;
+  font-size: 26px;
+  color: #b30000;
+  // añade espacio por debajo del titulo para que no este todo pegado
+  margin-bottom: 18px;
 }
 
-.portada {
+// indica el estilo de la imagen que pongo , la centra y deja espacio con los botones que creo debajo 
+.imagen-vinilo {
   width: 80%;
-  max-width: 300px;
+  max-width: 250px;
   border-radius: 12px;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
-/* botón estilo sangre */
-.btn-ir {
-  width: 80%;
-  max-width: 300px;
+// estilo de los botones , 
+.btn-metal {
   --background: #8b0000;
   --color: white;
+  width: 90%;
+  // texto en negrita
   font-weight: bold;
+  // redondea las esquinass de los botones
+  border-radius: 10px;
+  // tamaño texto
   font-size: 16px;
-  border-radius: 8px;
+  font-family: 'Metal Mania', cursive;
+  // añade espacio entre los botones para que no esten pegados
+  margin-bottom: 12px;
+  // separan las letras para que no aparezcan pegadas
+  letter-spacing: 1px;
+  // transicion suave para que al pasar por el boton se vea una tranformcion del boton
+  transition: transform 0.2s, filter 0.2s;
+}
+
+
+// esto me permite adaptar el formato al movil
+@media (max-width: 400px) {
+  .titulo {
+    font-size: 22px;
+  }
+
+  .titulo-header {
+    font-size: 20px;
+  }
+
+  .btn-metal {
+    font-size: 14px;
+  }
 }

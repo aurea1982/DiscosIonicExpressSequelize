@@ -1,22 +1,23 @@
+// importa el decorador @Component que angular usa para indicar que una clase es un componente
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
 
+// define como funciona o como se construye
 @Component({
+  // nombre del componente
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  standalone: false,
+  //indica el archivo HTML que contiene la vissta del componente
+  // como por ejemplo el ion-contenedor o botones
+  templateUrl: './home.page.html',
+  //indica el archivo de estilos CSS
+  styleUrls: ['./home.page.scss'],
+  //significa que este componente no es independiente
+  // es importante si no esta esta linea nos errores de codigo
+  standalone: false
 })
+
+// esta vacia porque solo muestra un menu con botones sin logica
 export class HomePage {
 
-  brand:string= "Master of Puppets";
-  model:string= "Metallica";
-
-  constructor(private router:Router) {}
-
-  gotoMyDiscos(){
-
-    this.router.navigateByUrl("/my-discos");
-  }
+  constructor() {}
 
 }

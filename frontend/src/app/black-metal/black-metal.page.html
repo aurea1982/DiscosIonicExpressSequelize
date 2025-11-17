@@ -1,0 +1,83 @@
+<!--creo un contenedor principal esto lo hago para que despues pueda aparecer en el movil con el formato adecuado-->
+<ion-content class="home-bg">
+  <!--centra el contenedro principal-->
+  <div class="contenedor-principal">
+    <!-- el card permite visualizar de forma de tarjeta el contenido-->
+    <ion-card class="card-contenedor">
+      <!-- esto especifica como es el estilo de la cabecera-->
+      <ion-card-header>
+        <ion-card-title class="titulo-header">Black Metal</ion-card-title>
+      </ion-card-header>
+      <!-- dentro de esto pongo todo en el ion content-->
+      <ion-card-content>
+
+       <!--aqui va el formullario , con su nombre y conecta el control del formulario llamandolo desde brand-->
+        <form [formGroup]="discoForm">
+          <ion-item>
+            <ion-input placeholder="Nombre del disco" formControlName="brand"></ion-input>
+          </ion-item>
+          <!-- se conceta con autor-->
+          <ion-item>
+            <ion-input placeholder="Autor / Grupo" formControlName="model"></ion-input>
+          </ion-item>
+          <!--conceta con la imagen de la portada, y permite elegir la imagen llamando a la funcion TypeScript-->        
+          <ion-item>
+            <input 
+              id="fileInput"
+              type="file" 
+              (change)="onFileSelected($event)"
+              accept=".jpg,.jpeg,.png"
+            />
+          </ion-item>
+
+          <!--va a ejecutar este boton el metodo guardar() de TypeScript-->
+          <div class="center-button">
+            <ion-button class="guardar-btn" (click)="guardar()">GUARDAR DISCO</ion-button>
+          </div>
+        </form>
+        <!-- recorre la lista de discos del TypeScript-->
+        <ion-list>
+          <ion-item *ngFor="let d of discos" class="item-disco">
+            <!--muestra la imagen del disco, la ruta donde encontramos la portada-->
+            <ion-thumbnail slot="start">
+              <img [src]="'assets/imagenes/' + d.portada" alt="Portada del disco" />
+            </ion-thumbnail>
+            <!--muestra el nombre del disco y el autor -->
+            <ion-label>
+              <h2 class="disc-brand">{{ d.brand }}</h2>
+              <p class="disc-model">{{ d.model }}</p>
+            </ion-label>
+            <!--con estos dos botones me permite editar y borrar los autores y nombre que hemos seleccionado-->
+            <ion-button class="btn-action" (click)="editarDisco(d)">EDITAR</ion-button>
+            <ion-button class="btn-action" (click)="deleteDisco(d.id)">BORRAR</ion-button>
+          </ion-item>
+        </ion-list>
+
+        <!---->
+        
+        <ion-grid class="stats-bottom">
+          <ion-row class="row-stats">
+            <ion-col class="stats-col">
+              <ion-icon name="flame"></ion-icon>
+              <div>Black Metal</div>
+            </ion-col>
+            <!--llama al metodo volverInicio() de TypeScript-->
+            <ion-col class="stats-col volver-col">
+              <ion-button class="volver-btn" (click)="volverInicio()">VOLVER</ion-button>
+            </ion-col>
+            <!--como voy a usar icon en este caso creo debajo un contador de cuantos discos hay de este estilo-->
+            <ion-col class="stats-col">
+              <ion-icon name="albums"></ion-icon>
+              <div>{{ discos.length }} discos</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>
+
