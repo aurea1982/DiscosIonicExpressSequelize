@@ -1,0 +1,135 @@
+// como queria un tipo de estilo de letra determinada importo Metal Mania
+
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+
+// fondo de la pagina de fondo
+.home-bg {
+  --background: #2b2b2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+// contenedor principal, la centra en la pantalla 
+// vision de movil
+.contenedor-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+// card principal que me permite hacer el modelo de movil
+// redondea los bordes, pone una sombra roja y adapta el tamaño a un movil
+ion-card.card-contenedor {
+  --background: #bfbfbf;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(255, 0, 0, 0.4);
+}
+
+// da forma al encabezado del card
+ion-card-header {
+  background: #bfbfbf;
+  border-bottom: 2px solid #8b0000;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 12px;
+}
+
+// formato del titulo, aqui utilizo el tipo de letra importado
+.titulo-header {
+  font-family: 'Metal Mania', cursive;
+  font-size: 22px;
+  color: #b30000;
+  text-align: center;
+}
+
+// contenedor del formulario
+.contenedor-central {
+  padding: 20px;
+}
+
+// como se vera la foto que saco
+.photo-preview {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+// formato de si no hay imagen, es decir lo que me sale cuando aun no he hecho nada
+.no-image-box {
+  width: 180px;
+  height: 180px;
+  border: 2px dashed #8b0000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #8b0000;
+  font-family: 'Metal Mania', cursive;
+}
+
+
+// estilo del boton metal
+.btn-metal {
+  --background: #8b0000 !important;
+  --color: white !important;
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 10px;
+  font-family: 'Metal Mania', cursive;
+  letter-spacing: 1px;
+
+
+  transform: none !important;
+  transition: none !important;
+}
+
+
+.btn-metal:hover {
+  filter: brightness(1.12);
+  transform: none !important;
+}
+
+
+.btn-danger {
+  --background: #4b0000 !important;
+  --color: white !important;
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 10px;
+  font-family: 'Metal Mania', cursive;
+  letter-spacing: 1px;
+
+  transform: none !important;
+  transition: none !important;
+}
+
+.btn-danger:hover {
+  filter: brightness(1.1);
+  transform: none !important;
+}
+
+
+ion-item {
+  --background: #fff;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+
+ion-button::part(native),
+ion-fab-button::part(native) {
+  transform: none !important;
+  transition: none !important;
+}
+
+ion-button:hover::part(native),
+ion-fab-button:hover::part(native) {
+  transform: none !important;
+  box-shadow: none !important;
+}

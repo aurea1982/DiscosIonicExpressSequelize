@@ -18,3 +18,4 @@ import { DoomMetalPage } from './doom-metal.page';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DoomMetalPageModule {}
+

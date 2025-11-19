@@ -1,21 +1,27 @@
 <!--este tipo de estructura es la general de ionic, empleo un contenedor principal para el contenido de la pagina, y emprelo el css para el fondo-->
 <ion-content class="home-bg">
-  <!--esto es el contenedor principal conde voya aplicar los estilos-->
+
+  <!--esto es el contenedor principal conde voy a aplicar los estilos-->
   <div class="contenedor-principal">
-    <!-- empleo el ion-card que fue lo que nos indican para que podamos mostrarlo dentro del movil con imagen de movil-->
+
+    <!-- Card principal con estilos -->
     <ion-card class="card-contenedor">
-      <!-- muestra el titulo que es Inicio y decorado con CSS-->
+
+      <!-- Título -->
       <ion-card-header>
         <ion-card-title class="titulo-header">Inicio</ion-card-title>
       </ion-card-header>
-      <!--dentro de este contenido va lo que hace referencia a mi HomePage con el estilo CSS-->
+
       <ion-card-content>
+
         <div class="contenedor-central">
+
           <h1 class="titulo">TIENDA DISCOS HEAVY</h1>
-          <!--para que pueda usar una imagen dentro del ionic tengo que metarla en la carpeta assets/imagenes y que sea jpg-->
+
+          <!-- Imagen -->
           <img src="assets/imagenes/heavy.jpg" class="imagen-vinilo">
 
-          <!--estoy creando una boton por cada estilo de musica que voy a poner y tiene en cuenta el estilo de CSS-->
+          <!-- Botones estilos -->
           <ion-button class="btn-metal" expand="block" routerLink="/heavy-clasico">
             HEAVY CLÁSICO
           </ion-button>
@@ -36,7 +42,14 @@
             DOOM METAL
           </ion-button>
 
+          <!-- boton que lleva a list-discos-->
+          <ion-button class="btn-metal" expand="block" routerLink="/list-discos">
+            <ion-icon slot="start" name="camera"></ion-icon>
+            SACAR FOTOS
+          </ion-button>
+
         </div>
+
       </ion-card-content>
 
     </ion-card>

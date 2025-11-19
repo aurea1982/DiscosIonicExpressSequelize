@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
 
-
 ion-content.home-bg {
   --background: #2b2b2b;
   display: flex;
@@ -11,14 +10,12 @@ ion-content.home-bg {
   overflow-y: auto;
 }
 
-
 .contenedor-principal {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
-
 
 ion-card.card-contenedor {
   --background: #bfbfbf;
@@ -30,7 +27,6 @@ ion-card.card-contenedor {
   margin: 20px auto;
 }
 
-
 .titulo-header {
   font-family: 'Metal Mania', cursive;
   font-size: 26px;
@@ -39,12 +35,13 @@ ion-card.card-contenedor {
   margin-bottom: 10px;
 }
 
-
 ion-item {
   --background: #bfbfbf;
   border-radius: 6px;
   margin-bottom: 10px;
 }
+
+
 
 .guardar-btn {
   display: block;
@@ -56,12 +53,16 @@ ion-item {
   font-weight: bold;
   font-size: 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s ease-in-out;
+
+
+  transform: none !important;
+  transition: none !important;
 }
 
 .guardar-btn:hover {
-  transform: scale(1.05);
+  transform: none !important;
 }
+
 
 
 ion-list {
@@ -99,6 +100,7 @@ ion-thumbnail img {
 }
 
 
+
 .btn-action {
   --background: #8b0000;
   --color: #efefef;
@@ -106,11 +108,14 @@ ion-thumbnail img {
   height: 26px;
   border-radius: 4px;
   margin-left: 6px;
-  transition: transform 0.2s ease-in-out;
+
+
+  transform: none !important;
+  transition: none !important;
 }
 
 .btn-action:hover {
-  transform: scale(1.05);
+  transform: none !important;
 }
 
 
@@ -141,6 +146,7 @@ ion-thumbnail img {
 }
 
 
+
 .volver-btn {
   --background: #8b0000;
   --color: #ffffff;
@@ -150,19 +156,31 @@ ion-thumbnail img {
   font-size: 14px;
   padding: 6px 24px;
   margin-top: 10px;
-  box-shadow: none;
   text-transform: uppercase;
-  transition: transform 0.2s ease-in-out, background 0.2s;
+
+  transform: none !important;
+  transition: none !important;
 }
 
 .volver-btn:hover {
-  transform: scale(1.05);
-  background: #a30000;
+  transform: none !important;
 }
 
+
+ion-button::part(native) {
+  transform: none !important;
+  transition: none !important;
+}
+
+ion-button:hover::part(native),
+ion-button:active::part(native),
+ion-button:focus::part(native) {
+  transform: none !important;
+  box-shadow: none !important;
+}
 
 ion-button.volver-btn::part(native) {
   background: #8b0000 !important;
   box-shadow: none !important;
-  border: none !important;
 }
+

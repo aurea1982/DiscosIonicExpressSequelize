@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
 
-
 .home-bg {
   --background: #141414;
   display: flex;
@@ -28,7 +27,6 @@ ion-card.card-contenedor {
   margin: 20px auto;
 }
 
-
 .titulo-header {
   font-family: 'Metal Mania', cursive;
   font-size: 26px;
@@ -44,6 +42,7 @@ ion-item {
   color: #fff;
 }
 
+
 .guardar-btn {
   display: block;
   margin: 16px auto;
@@ -53,11 +52,10 @@ ion-item {
   border-radius: 6px;
   font-weight: bold;
   font-size: 15px;
-  transition: transform 0.2s ease-in-out;
-}
 
-.guardar-btn:hover {
-  transform: scale(1.05);
+
+  transform: none !important;
+  transition: none !important;
 }
 
 
@@ -81,6 +79,7 @@ ion-thumbnail img {
   border-radius: 6px;
 }
 
+
 .disc-brand {
   font-family: 'Metal Mania', cursive;
   font-size: 16px;
@@ -100,13 +99,11 @@ ion-thumbnail img {
   height: 26px;
   border-radius: 4px;
   margin-left: 6px;
-  transition: transform 0.2s ease-in-out;
-}
 
-.btn-action:hover {
-  transform: scale(1.05);
-}
 
+  transform: none !important;
+  transition: none !important;
+}
 
 .stats-bottom {
   margin-top: 20px;
@@ -144,19 +141,28 @@ ion-thumbnail img {
   font-size: 14px;
   padding: 6px 24px;
   margin-top: 10px;
-  box-shadow: none;
-  text-transform: uppercase;
-  transition: transform 0.2s ease-in-out, background 0.2s;
+
+
+  transform: none !important;
+  transition: none !important;
 }
 
-.volver-btn:hover {
-  transform: scale(1.05);
-  background: #e5c100;
+
+ion-button::part(native) {
+  transform: none !important;
+  transition: none !important;
+}
+
+ion-button:hover::part(native),
+ion-button:active::part(native),
+ion-button:focus::part(native) {
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 
 ion-button.volver-btn::part(native) {
   background: #ffd700 !important;
-  border: none !important;
   box-shadow: none !important;
+  border: none !important;
 }

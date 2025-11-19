@@ -4,6 +4,7 @@
 
     <ion-card class="card-contenedor">
 
+      
       <ion-card-header>
         <ion-card-title class="titulo-header">Death Metal</ion-card-title>
       </ion-card-header>
@@ -12,6 +13,7 @@
 
        
         <form [formGroup]="discoForm">
+
           <ion-item>
             <ion-input placeholder="Nombre del disco" formControlName="brand"></ion-input>
           </ion-item>
@@ -20,7 +22,6 @@
             <ion-input placeholder="Autor / Grupo" formControlName="model"></ion-input>
           </ion-item>
 
-          
           <ion-item>
             <input 
               id="fileInput"
@@ -33,41 +34,74 @@
           <div class="center-button">
             <ion-button class="guardar-btn" (click)="guardar()">GUARDAR DISCO</ion-button>
           </div>
+
         </form>
 
-        
+      
         <ion-list>
+
           <ion-item *ngFor="let d of discos" class="item-disco">
+
+         
             <ion-thumbnail slot="start">
-              <img [src]="'assets/imagenes/' + d.portada" alt="Portada del disco" />
+
+             
+              <img 
+                *ngIf="d.filename; else noImage"
+                [src]="'http://localhost:8080/images/' + d.filename"
+                alt="Portada del disco"
+              />
+
+             
+              <ng-template #noImage>
+                <img src="assets/imagenes/default-disco.png" alt="Sin imagen">
+              </ng-template>
+
             </ion-thumbnail>
 
+           
             <ion-label>
               <h2 class="disc-brand">{{ d.brand }}</h2>
               <p class="disc-model">{{ d.model }}</p>
             </ion-label>
 
-            <ion-button class="btn-action" (click)="editarDisco(d)">EDITAR</ion-button>
-            <ion-button class="btn-action" (click)="deleteDisco(d.id)">BORRAR</ion-button>
+           
+            <ion-button class="edit-btn" (click)="editarDisco(d)">
+              EDITAR
+            </ion-button>
+
+           
+            <ion-button class="delete-btn" (click)="deleteDisco(d.id)">
+              BORRAR
+            </ion-button>
+
           </ion-item>
+
         </ion-list>
 
-       
+     
         <ion-grid class="stats-bottom">
           <ion-row class="row-stats">
+
+        
             <ion-col class="stats-col">
               <ion-icon name="skull"></ion-icon>
               <div>Death Metal</div>
             </ion-col>
 
+          
             <ion-col class="stats-col volver-col">
-              <ion-button class="volver-btn" (click)="volverInicio()">VOLVER</ion-button>
+              <ion-button class="volver-btn" (click)="volverInicio()">
+                VOLVER
+              </ion-button>
             </ion-col>
 
+          
             <ion-col class="stats-col">
               <ion-icon name="albums"></ion-icon>
               <div>{{ discos.length }} discos</div>
             </ion-col>
+
           </ion-row>
         </ion-grid>
 
@@ -78,4 +112,5 @@
   </div>
 
 </ion-content>
+
 

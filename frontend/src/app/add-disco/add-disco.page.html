@@ -1,0 +1,82 @@
+<!--como todos los html que he creado lo he hecho dentro del content para que tenga la apariendica de pantalla de movil-->
+
+<ion-content class="home-bg">
+
+  <div class="contenedor-principal">
+
+    <ion-card class="card-contenedor">
+
+      <!-- esta es la cabecera que va dentro de un card-->
+      <ion-card-header>
+        <ion-card-title class="titulo-header">Añadir Disco</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <div class="contenedor-central">
+          <!--permite mostrar la foto, si capturedPhoto esta correcta muestra la foto, sino pues dice NO IMAGE-->
+          <div class="photo-preview">
+            <img *ngIf="capturedPhoto; else noImage" [src]="capturedPhoto" />
+            <ng-template #noImage>
+              <div class="no-image-box">NO IMAGE</div>
+            </ng-template>
+          </div>
+
+          <div class="photo-buttons">
+            <!-- creacion de los botones sacar foto,elegir la imagen, y descartar la imagen sacada -->
+            <ion-button class="btn-metal" expand="block" (click)="takePhoto()">
+              <ion-icon slot="start" name="camera"></ion-icon>
+              SACAR FOTO
+            </ion-button>
+
+            <ion-button class="btn-metal" expand="block" (click)="pickImage()">
+              <ion-icon slot="start" name="image"></ion-icon>
+              ELEGIR IMAGEN
+            </ion-button>
+
+            <ion-button class="btn-danger" expand="block" (click)="discardImage()">
+              <ion-icon slot="start" name="trash"></ion-icon>
+              DESCARTAR
+            </ion-button>
+
+          </div>
+          <!--aqui me permite meter los datos de grupo, disco y estilo-->
+          <form [formGroup]="discoForm">
+
+            <ion-item>
+              <ion-input placeholder="Nombre del disco" formControlName="brand"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input placeholder="Autor / Grupo" formControlName="model"></ion-input>
+            </ion-item>
+            <!-- esto me permite sacar el listado de estilos que hay por defecto para elegir uno-->
+             <!--crea un array para poder mostrar las opciones-->
+            <ion-item>
+              <ion-label>Estilos</ion-label>
+              <ion-select formControlName="estilo" interface="popover">
+                <ion-select-option *ngFor="let e of estilos" [value]="e">
+                  {{ e }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <!--boton guardar-->
+            <ion-button class="btn-metal" expand="block" (click)="submitForm()">
+              GUARDAR
+            </ion-button>
+            <!--boton para volver a la vista list-discos-->
+            <ion-button class="btn-metal" expand="block" (click)="volverLista()">
+              VOLVER A LA LISTA
+            </ion-button>
+
+          </form>
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>

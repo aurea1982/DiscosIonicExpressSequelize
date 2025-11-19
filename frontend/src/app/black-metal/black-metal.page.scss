@@ -1,7 +1,8 @@
+// importa la letra que decidi usar Metal Mania
 
-// me permite cargar la fuente Metal Mania desde google fonts
 @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
 
+// fondo de la pagina general
 .home-bg {
   --background: #1b1b1b;
   display: flex;
@@ -11,6 +12,7 @@
   padding-top: 20px;
 }
 
+// mantiene el card en el centro
 .contenedor-principal {
   display: flex;
   justify-content: center;
@@ -18,11 +20,10 @@
   height: 100%;
 }
 
+// da forma al card que me permite darle forma de movil para pasar al android
 ion-card.card-contenedor {
   --background: #2e2e2e;
-  // esquinas redondeadas
   border-radius: 16px;
-  // me permite darle estructura para poder verlo en el movil
   width: 90%;
   max-width: 420px;
   text-align: center;
@@ -30,6 +31,7 @@ ion-card.card-contenedor {
   margin: 20px auto;
 }
 
+// formato del titulo
 .titulo-header {
   font-family: 'Metal Mania', cursive;
   font-size: 26px;
@@ -37,16 +39,15 @@ ion-card.card-contenedor {
   text-align: center;
 }
 
-
+// formato del formulario
 ion-item {
   --background: #2e2e2e;
-  // esquina redondeada
   border-radius: 6px;
-  // separacion para no ver todo tan pegado
   margin-bottom: 10px;
   color: #d6d6d6;
 }
 
+// formato boton guardar
 .guardar-btn {
   display: block;
   margin: 16px auto;
@@ -57,19 +58,25 @@ ion-item {
   font-weight: bold;
   font-size: 15px;
   box-shadow: 0 3px 8px rgba(255, 255, 255, 0.1);
-  transition: transform 0.2s ease-in-out;
+  transition: none !important; // le quita el hacerse grande u otra transicion que no me gusta
+  transform: none !important;
 }
 
-.guardar-btn:hover {
-  transform: scale(1.05);
+.guardar-btn:hover,
+.guardar-btn:active,
+.guardar-btn:focus {
+  transform: none !important;
+  background: #000 !important;
 }
 
-// hace que la lista sea transparente, sin rellenos
+// formato del listado de todos los discos
 ion-list {
   background: transparent;
   padding: 0;
 }
 
+// le da formato a como se muestran los datos de los discos
+// portada (upload), nombre, autor y estilo
 .item-disco {
   --background: #2e2e2e;
   border-radius: 6px;
@@ -78,6 +85,7 @@ ion-list {
   align-items: center;
 }
 
+// formato de la imagen del disco
 ion-thumbnail img {
   width: 55px;
   height: 55px;
@@ -85,6 +93,7 @@ ion-thumbnail img {
   border-radius: 6px;
 }
 
+// muestra todos los datos del disco y aqui indico como es su ubicacion y su formato
 .disc-brand {
   font-family: 'Metal Mania', cursive;
   font-size: 16px;
@@ -96,7 +105,7 @@ ion-thumbnail img {
   color: #aaa;
 }
 
-// para el boton de editar y borrar
+// formato de boton editar y borrar
 .btn-action {
   --background: #000;
   --color: #fff;
@@ -104,43 +113,50 @@ ion-thumbnail img {
   height: 26px;
   border-radius: 4px;
   margin-left: 6px;
-  transition: transform 0.2s ease-in-out;
+  transition: none !important;
+  transform: none !important;
 }
 
-.btn-action:hover {
-  transform: scale(1.05);
+.btn-action:hover,
+.btn-action:active,
+.btn-action:focus {
+  transform: none !important;
+  background: #000 !important;
 }
 
-// centra la parte inferior
+
 .stats-bottom {
   margin-top: 20px;
   text-align: center;
   padding-bottom: 15px;
 }
 
-// alinea iconos y textos
 .row-stats {
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
 
+
 .stats-col {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 13px;
-  color: #d6d6d6;
 }
 
-// lo pongo porque sino en el boton volver aparece con unos margenes raros en gris
+.stats-col ion-icon,
+.stats-col div {
+  color: #000000 !important;   
+  font-weight: bold;
+}
+
 .stats-col ion-icon {
-  font-size: 22px;
-  color: #fff;
-  margin-bottom: 3px;
+  font-size: 28px;
+  margin-bottom: 4px;
 }
 
-
+// boton volver 
 .volver-btn {
   --background: #000;
   --color: #fff;
@@ -152,16 +168,34 @@ ion-thumbnail img {
   margin-top: 10px;
   box-shadow: none;
   text-transform: uppercase;
-  transition: transform 0.2s ease-in-out, background 0.2s;
+  transition: none !important;
+  transform: none !important;
 }
 
-.volver-btn:hover {
-  transform: scale(1.05);
-  background: #222;
+.volver-btn:hover,
+.volver-btn:active,
+.volver-btn:focus {
+  transform: none !important;
+  background: #000 !important;
+}
+
+
+
+ion-button::part(native) {
+  transform: none !important;
+  transition: none !important;
+}
+
+ion-button:hover::part(native),
+ion-button:active::part(native),
+ion-button:focus::part(native) {
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 ion-button.volver-btn::part(native) {
   background: #000 !important;
-  border: none !important;
+  transform: none !important;
+  transition: none !important;
   box-shadow: none !important;
 }

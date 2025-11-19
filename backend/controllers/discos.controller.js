@@ -1,34 +1,26 @@
 const db = require("../models");
 const Discos = db.discos;
 const Op = db.Sequelize.Op;
-// importaciones iniciales
-// cargo el objeto db desde models
-// discos apunta al modelo db.discos
-// Op contiene operadores de Sequelize
 
-
-// define la funcion para crear un disco
+// crea un nuevo campo en discos
+// primero mira si brand no esta vacio, luego crea un objeto nuevo con cada uno de los campos 
+// luego lo mete en la BD, da un error en caso de si pasa un error
 exports.create = (req, res) => {
-
-  // si no llega el campo brand devuelve un error
   if (!req.body.brand) {
     return res.status(400).send({
       message: "El nombre del disco (brand) no puede estar vacío."
     });
   }
 
-  // crea un objeto del disco, toma los datos del req.body
   const nuevoDisco = {
     brand: req.body.brand,
     model: req.body.model,
-    portada: req.body.portada || null,
+    filename: req.file ? req.file.filename : "",
     estilo: req.body.estilo || "Heavy Clásico"
   };
 
-  // guarda en BD, sequelize inserta el disco en mysql
   Discos.create(nuevoDisco)
     .then(data => res.send(data))
-    // si falla por algun motivo me da mensaje de error al crear el disco
     .catch(err => {
       res.status(500).send({
         message: err.message || "Error creando el disco."
@@ -36,12 +28,11 @@ exports.create = (req, res) => {
     });
 };
 
-
-// permite obtener todos los discos de mi bd
+// obtiene todos los discos que tengo  en mi BD
+// llama Discos.findAll() que permite obtener todos los registros de la tabla Discos
 exports.findAll = (req, res) => {
-  Discos.findAll() // devuelve los registros de la tabla (SELECT * FROM discos)
+  Discos.findAll()
     .then(data => res.send(data))
-    // en caso de que algo no funcione nos da un mensaje de error
     .catch(err => {
       res.status(500).send({
         message: err.message || "Error al recuperar los discos."
@@ -49,14 +40,14 @@ exports.findAll = (req, res) => {
     });
 };
 
-// obtiene un determinado disco segun su id
+// permite buscar un id dentro de la tabla discos
+// busca dentro de Discos.findByPk el id introducido para la busqueda
 exports.findOne = (req, res) => {
-  const id = req.params.id; // toma la id de req y lo mete en la constante id
+  const id = req.params.id;
 
-  Discos.findByPk(id) // permite la busqueda por la id
+  Discos.findByPk(id)
     .then(data => {
       if (data) res.send(data);
-      // si no existe da mensaje de error
       else res.status(404).send({ message: "Disco no encontrado." });
     })
     .catch(err => {
@@ -66,25 +57,29 @@ exports.findOne = (req, res) => {
     });
 };
 
-// actualiza un disco por id
-
+// actualiza el disco teniendo en cuenta su id
+// lo que mira es si la informacion es la misma que ya tiene o hay algun error
+// y si hay que hay algo de modificar lo hace y lo indica
 exports.update = (req, res) => {
-  const id = req.params.id; //coge la id de req y la mete en la constante id
+  const id = req.params.id;
 
-  // y actualiza todos los campos de mi disco
+ 
+  const filenameFinal = req.file
+    ? req.file.filename
+    : req.body.filenameOriginal; 
+
   const dataActualizada = {
     brand: req.body.brand,
     model: req.body.model,
-    portada: req.body.portada,
-    estilo: req.body.estilo
+    estilo: req.body.estilo,
+    filename: filenameFinal
   };
 
-
-  Discos.update(dataActualizada, { where: { id: id } }) // esto permite la ejecutar la actualizacion
+  Discos.update(dataActualizada, { where: { id: id } })
     .then(([num]) => {
-      if (num === 1) { // 1 registro actualizado
+      if (num === 1) { // si el resultado es 1 es que lo ha actualizado correctamente
         res.send({ message: "Disco actualizado correctamente." });
-      } else { // siono 0 no actualizado y da mensaje de error
+      } else {
         res.send({
           message: `No se pudo actualizar el disco con id=${id}.`
         });
@@ -97,15 +92,15 @@ exports.update = (req, res) => {
     });
 };
 
-// permite borrar un disco segun su id
+// permite borrar un id indicado de la tabla discos
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Discos.destroy({ where: { id: id } }) // es como poner DELETE FROM discos WHERE id=?
+  Discos.destroy({ where: { id: id } })
     .then(num => {
-      if (num === 1) { // lo mismo si es 1 borra
+      if (num === 1) { // si el resultado es 1 es que lo ha borrado
         res.send({ message: "Disco borrado correctamente!" });
-      } else { // siono no se se encontro
+      } else {
         res.send({
           message: `No se pudo borrar el disco con id=${id}.`
         });
@@ -118,8 +113,9 @@ exports.delete = (req, res) => {
     });
 };
 
-// como voy a poner cada disco por su estilo para ponerlo en la vista que le toda 
-// estoy buscando el estilo, toma el estilo desde la URL
+// permite buscar por el campo estilo
+// se introduce el estilo y si no existe me da error y si es correcto me da la informacion
+// de todo aquello que lleve dicho estilo
 exports.findByEstilo = (req, res) => {
   const estilo = req.params.estilo;
 
@@ -129,24 +125,18 @@ exports.findByEstilo = (req, res) => {
     });
   }
 
- 
-  // es como si ejecutase SELECT * FROM discos WHERE estilo LIKE '%Heavy%'
-  // es decir consulta discos con estilo que tengan la palabra heavy 
   Discos.findAll({
     where: {
       estilo: { [Op.like]: `%${estilo}%` }
     }
   })
-    .then(data => {
-      if (data.length === 0) {
-        res.status(200).send([]); 
-      } else {
-        res.send(data);
-      }
-    })
+    .then(data => res.send(data))
     .catch(err => {
       res.status(500).send({
         message: err.message || "Error al recuperar discos por estilo."
       });
     });
 };
+
+// exporta las funciones que he creado como controladores para Discos, en este caso
+// permit crear, leer, actualizar, borrar y buscar por el campo estilo

@@ -1,7 +1,6 @@
-module.exports = (sequelize, Sequelize) => { // recibe la conexion y las librerias
-  const Discos = sequelize.define( // crea modelo discos
-    "discos", 
-    // se definen los campos de la bd
+module.exports = (sequelize, Sequelize) => {
+  const Discos = sequelize.define(
+    "discos",
     {
       id: {
         type: Sequelize.INTEGER,
@@ -14,23 +13,21 @@ module.exports = (sequelize, Sequelize) => { // recibe la conexion y las libreri
       model: {
         type: Sequelize.STRING
       },
-      portada: {
-        type: Sequelize.STRING
-      },
       estilo: {
         type: Sequelize.STRING(50),
         allowNull: false,
         defaultValue: "Heavy Clásico"
+      },
+      filename: {
+        type: Sequelize.STRING
       }
     },
     {
-      //le dice a Sequelize que la tabla de la bd se llama discos en este caso
-      tableName: "discos", 
-      // desactiva las columnas automaticas
-      timestamps: false     
+      tableName: "discos", // le dice a sequelize que  tabla debe usar de la BD
+      timestamps: false // no deja que sequelize agrege columnas automaticas
     }
   );
 
-  // devuelve el modelo parque que lo use index.js y el resto
   return Discos;
 };
+ // permite definir la estructura de la tabla y como Sequelize lo mapea para la aplicacion

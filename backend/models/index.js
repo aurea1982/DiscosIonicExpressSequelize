@@ -1,32 +1,32 @@
-const dbConfig = require("../config/db.config.js"); //importa la configuracion de la bd del archivo config
+const dbConfig = require("../config/db.config.js");
+const Sequelize = require("sequelize");
 
-const Sequelize = require("sequelize"); // importa libreria Sequelize 
-
-// crea la conexion a la bd (nombre,usuario,contraseña y pool)
+// librerias de Sequelize y con sequelize activa la conexion
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-  operatorsAliases: false, 
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle
-  }
+    // crea la conexion
+  },
+  logging: false // desactiva que aparezcan lo SQl por consola
 });
 
+const db = {}; // guarda todo lo relacionado de la BD
 
-// crea un objeto vacio llamado db que luego contendra todo lo relativo a mi bd
-const db = {};
-
-// guarda en el objeto db la libreria de Sequelize y la instancia conectada a la bd
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// asi otros archivos pueden usarlo y acceder a ellos
-// importa el modelo discos y lo mete dentro de db
-// el modelo recibe la conexion y las librerias
-db.discos = require("./discos.model.js")(sequelize, Sequelize);
 
-// exporta el objeto db completo para que el resto de la aplicacion pueda usarlo
+db.discos = require("./discos.model.js")(sequelize, Sequelize);
+// se carga discos pasandole la conexion sequelize y la clase Sequelize
+
 module.exports = db;
+
+// importa la configuracion de la BD
+// crea la conexion Sequelize
+// carga los modelos
+// exporta un objeto db

@@ -1,18 +1,7 @@
-// importa NgModule => define modulo angular
-// importa RouterModule => permite crear rutas
-// importa Routes => representa un arreglo de rutas
-// importa HomePage componente asociado a esa ruta 
-
 import { NgModule } from '@angular/core';
-
-// Routes tipo especial que representa un array de rutas de la aplicacion (path (URL) + componente (vista que debe mostrar))
 import { RouterModule, Routes } from '@angular/router';
-// componente de la pagina que va a mostrar
-// tiene plantilla HTML, TS y CSS
-// controla el interface que vera el usuario
 import { HomePage } from './home.page';
 
-// Routes el mapa completo 
 const routes: Routes = [
   {
     // con ruta vacia, muestra la pagina HomePage
@@ -20,7 +9,6 @@ const routes: Routes = [
     component: HomePage,
   }
 ];
-
 
 // @NgModule decorador en angular que sirve para definir un modulo
 // un modulo tiene cosas como: componentes, directivas, pipes, rutas

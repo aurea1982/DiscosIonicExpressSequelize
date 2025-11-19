@@ -1,120 +1,135 @@
-// Componet => crea componentes
-// OnInit => interface para ejecutar ngOnInit
 import { Component, OnInit } from '@angular/core';
-// FormBuilder, FormGroup, Validators => permite crear y manejar formularios  
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// se comunica con la Api Expres para CRUD de discos 
 import { DiscosService } from '../services/discos-service';
-// permite navegar a otra pagina
 import { Router } from '@angular/router';
 
-// decorador del componente
 @Component({
-  selector: 'app-black-metal', // nombre interno del componente
-  templateUrl: './black-metal.page.html', // archivo HTML
-  styleUrls: ['./black-metal.page.scss'], // archivo CSS
-  standalone: false // que el componente pertenece a un modulo, si no lo pongo me da errores
+  // selecciona el componente, html y css, no es standalone (modulo clasico Angular)
+  selector: 'app-black-metal',
+  templateUrl: './black-metal.page.html',
+  styleUrls: ['./black-metal.page.scss'],
+  standalone: false
 })
 export class BlackMetalPage implements OnInit {
 
-  // creo la lista de discos obtenidos del servidor
-  discos: any = [];
-  // crea el ngOnInit
-  discoForm!: FormGroup;
-  // indica con el id esta creando un disco o editandolo
-  idEditando: any = null;
-  
+  discos: any = []; //array de le este estilo
+  discoForm!: FormGroup; // formulario
+  idEditando: number | null = null;
+
+  fileBlob: File | null = null; // para la imagen de multer
+  filenameOriginal: string = "";
+
   constructor(
-    private discosService: DiscosService, // CRUD de discos
-    private fb: FormBuilder, // crea el formulario
-    private router: Router // navega en entre pagina
+    private discosService: DiscosService,
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
-  // formulario que se ejecuta prara crear la pagina
+  // inicializa el formulario y carga los discos de black metal
   ngOnInit(): void {
-    
+
     this.discoForm = this.fb.group({
-      brand: ['', Validators.required],// especifica que es obligatorio
-      model: ['', Validators.required], // tb obligatorio
-      portada: [''],
-      estilo: ['Black Metal'] // el estilo ha de ser Black Metal para que aparezca en este formulario
+      brand: ['', Validators.required],
+      model: ['', Validators.required],
+      estilo: ['Black Metal'], // se requiere este requisito
+      filenameOriginal: [''] // he de ponerlo asi para que la portada use la imagen tratada con multer
     });
 
-    // y llama a cargar los discos al entrar
     this.getAllDiscos();
   }
 
-
-  // permite cargar todos los disgos segun el estilo
-  // si es estilo black metal entonces se enseña 
- 
+  // obtiene los discos del estilo black metal
+  // llama con un get al backend con el estilo black metal
   getAllDiscos() {
-    this.discosService.getDiscosByEstilo('Black Metal').subscribe((r: any) => {
-      this.discos = r;
-      console.log('Discos Black Metal cargados:', this.discos);
-    });
+    this.discosService.getDiscosByEstilo('Black Metal')
+      .subscribe((r: any) => {
+        this.discos = r;
+      });
   }
 
-  // permite elegir la portada de ese disco que cargado si su estilo es black metal
+  //seleciona la imagen como ahora estoy usando el multer tengo que guardar el archivo que me envia el backend
+  // ya que ahora no estan las imagenes en el fontend
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    if (file) this.discoForm.patchValue({ portada: file.name });
+    if (!file) return;
+    this.fileBlob = file;
   }
 
-  
+  // guarda los datos y tiene en cuenta la foto que sea Blod para ser usada por multer
   guardar() {
+
     const discoData = {
-      // al estar en la pagina de black metal por defecto en estilo se guarda este
-      ...this.discoForm.value,
-      estilo: 'Black Metal'
+      brand: this.discoForm.value.brand,
+      model: this.discoForm.value.model,
+      estilo: "Black Metal",
     };
 
-   
+ 
     if (this.idEditando == null) {
-      this.discosService.postDisco(discoData).subscribe(() => {
+
+      const blobToSend = this.fileBlob ? this.fileBlob : new Blob();
+
+      this.discosService.createDisco(discoData, blobToSend).subscribe(() => {
         this.getAllDiscos();
-        this.discoForm.reset({ estilo: 'Black Metal' });
-        const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-        if (fileInput) fileInput.value = '';
+        this.resetForm();
+        // crea un nuevo disco cuando guarda la informacion, con un estilo por defecto
       });
-       // pero puedo leer en nombre y autor del disco 
-    // coge el formulario de leer todos los discoss
-    // y lo crea con un id que le corresponda
-    } else {
-      this.discosService.updateDisco(this.idEditando, discoData).subscribe(() => {
+
+    } 
+ 
+    else {
+
+      this.discosService.updateDisco(// o lo modifica si ya existe con la informacion nueva
+        this.idEditando,
+        discoData,
+        this.fileBlob,  
+        this.discoForm.value.filenameOriginal
+      ).subscribe(() => {
         this.getAllDiscos();
-        this.idEditando = null;
-        this.discoForm.reset({ estilo: 'Black Metal' });
-        const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-        if (fileInput) fileInput.value = '';
+        this.resetForm();
       });
     }
   }
 
+  // permite el editar el disco con la informacion nueva
+  // en caso de que sea todo igual no hace nada
   editarDisco(d: any) {
-    // lama al disco segun su id
-
     this.idEditando = d.id;
-    this.discoForm.patchValue(d);
+    this.filenameOriginal = d.filename;
 
-    // permite visualizar ese disco segun el id
-    // y volver a guardarlo con los datos modificados
+    this.discoForm.patchValue({
+      brand: d.brand,
+      model: d.model,
+      estilo: d.estilo,
+      filenameOriginal: d.filename
+    });
+
+    this.fileBlob = null;
+  }
+
+  // permite limpiar el formulario una vez que se guarda o edita la informacion
+  resetForm() {
+    this.idEditando = null;
+    this.fileBlob = null;
+
+    this.discoForm.reset({
+      brand: "",
+      model: "",
+      estilo: "Black Metal",
+      filenameOriginal: ""
+    });
+
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    if (fileInput) {
-      const dataTransfer = new DataTransfer();
-      const fakeFile = new File([], d.portada);
-      dataTransfer.items.add(fakeFile);
-      fileInput.files = dataTransfer.files;
-    }
+    if (fileInput) fileInput.value = '';
   }
 
-  // llama al disco por id
-  // lu lo borra y recarga la lista de discos
+  // al pulsar el boton de borrar lo que hace es eliminar el disco selecionado de la BD
   deleteDisco(id: any) {
-    this.discosService.deleteDisco(id).subscribe(() => this.getAllDiscos());
+    this.discosService.deleteDisco(id)
+      .subscribe(() => this.getAllDiscos());
   }
 
-  // creo un formulario que me permite volver al pulsar el boton de volver a la pagina home
+  // al pulsar el boton de volver vuelve a la vista home
   volverInicio() {
     this.router.navigate(['/home']);
   }

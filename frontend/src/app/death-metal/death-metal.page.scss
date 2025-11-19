@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
 
-
 .home-bg {
   --background: #111;
   display: flex;
@@ -9,7 +8,6 @@
   padding-top: 20px;
   height: 100%;
 }
-
 
 .contenedor-principal {
   display: flex;
@@ -29,7 +27,6 @@ ion-card.card-contenedor {
   margin: 20px auto;
 }
 
-
 .titulo-header {
   font-family: 'Metal Mania', cursive;
   font-size: 26px;
@@ -37,13 +34,13 @@ ion-card.card-contenedor {
   text-align: center;
 }
 
-
 ion-item {
   --background: #2a2a2a;
   border-radius: 6px;
   margin-bottom: 10px;
   color: #fff;
 }
+
 
 .guardar-btn {
   display: block;
@@ -54,13 +51,18 @@ ion-item {
   border-radius: 6px;
   font-weight: bold;
   font-size: 15px;
-  transition: transform 0.2s ease-in-out;
+
+ 
+  transform: none !important;
+  transition: none !important;
 }
 
-.guardar-btn:hover {
-  transform: scale(1.05);
+.guardar-btn:hover,
+.guardar-btn:active,
+.guardar-btn:focus {
+  transform: none !important;
+  background: #8b0000 !important;
 }
-
 
 ion-list {
   background: transparent;
@@ -93,21 +95,42 @@ ion-thumbnail img {
   color: #ccc;
 }
 
-
-.btn-action {
-  --background: #8b0000;
-  --color: #fff;
-  font-size: 12px;
-  height: 26px;
+ion-button.edit-btn {
+  --background: #000 !important;
+  --color: #fff !important;
   border-radius: 4px;
-  margin-left: 6px;
-  transition: transform 0.2s ease-in-out;
+  height: 26px;
+  font-size: 12px;
+
+  transition: none !important;
+  transform: none !important;
 }
 
-.btn-action:hover {
-  transform: scale(1.05);
+ion-button.edit-btn:hover,
+ion-button.edit-btn:active,
+ion-button.edit-btn:focus {
+  transform: none !important;
+  background: #000 !important;
 }
 
+
+ion-button.delete-btn {
+  --background: #8b0000 !important;
+  --color: #fff !important;
+  border-radius: 4px;
+  height: 26px;
+  font-size: 12px;
+
+  transition: none !important;
+  transform: none !important;
+}
+
+ion-button.delete-btn:hover,
+ion-button.delete-btn:active,
+ion-button.delete-btn:focus {
+  transform: none !important;
+  background: #a30000 !important;
+}
 
 .stats-bottom {
   margin-top: 20px;
@@ -135,7 +158,6 @@ ion-thumbnail img {
   margin-bottom: 3px;
 }
 
-
 .volver-btn {
   --background: #8b0000;
   --color: #fff;
@@ -145,19 +167,29 @@ ion-thumbnail img {
   font-size: 14px;
   padding: 6px 24px;
   margin-top: 10px;
-  box-shadow: none;
   text-transform: uppercase;
-  transition: transform 0.2s ease-in-out, background 0.2s;
+
+ 
+  transform: none !important;
+  transition: none !important;
 }
 
-.volver-btn:hover {
-  transform: scale(1.05);
-  background: #a30000;
-}
-
-
-ion-button.volver-btn::part(native) {
+.volver-btn:hover,
+.volver-btn:active,
+.volver-btn:focus {
+  transform: none !important;
   background: #8b0000 !important;
+}
+
+
+ion-button::part(native) {
+  transform: none !important;
+  transition: none !important;
+}
+
+ion-button:hover::part(native),
+ion-button:active::part(native),
+ion-button:focus::part(native) {
+  transform: none !important;
   box-shadow: none !important;
-  border: none !important;
 }

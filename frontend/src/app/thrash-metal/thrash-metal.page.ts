@@ -13,7 +13,10 @@ export class ThrashMetalPage implements OnInit {
 
   discos: any = [];
   discoForm!: FormGroup;
-  idEditando: any = null;
+  idEditando: number | null = null;
+
+  fileBlob: File | null = null;
+  filenameOriginal: string = "";
 
   constructor(
     private discosService: DiscosService,
@@ -22,79 +25,93 @@ export class ThrashMetalPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+
     this.discoForm = this.fb.group({
       brand: ['', Validators.required],
       model: ['', Validators.required],
-      portada: [''],
-      estilo: ['Thrash Metal']
+      estilo: ['Thrash Metal'],
+      filenameOriginal: ['']   
     });
 
     this.getAllDiscos();
   }
 
- 
   getAllDiscos() {
-    this.discosService.getDiscosByEstilo('Thrash Metal').subscribe((r: any) => {
-      this.discos = r;
-      console.log('Discos Thrash Metal cargados:', this.discos);
-    });
+    this.discosService.getDiscosByEstilo('Thrash Metal')
+      .subscribe((r: any) => {
+        this.discos = r;
+      });
   }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    if (file) this.discoForm.patchValue({ portada: file.name });
+    if (!file) return;
+    this.fileBlob = file;  
   }
 
   guardar() {
+
     const discoData = {
-      ...this.discoForm.value,
-      estilo: 'Thrash Metal'
+      brand: this.discoForm.value.brand,
+      model: this.discoForm.value.model,
+      estilo: "Thrash Metal",
+      filenameOriginal: this.discoForm.value.filenameOriginal
     };
 
+   
     if (this.idEditando == null) {
-     
-      this.discosService.postDisco(discoData).subscribe(() => {
-        this.getAllDiscos();
-        this.discoForm.reset({ estilo: 'Thrash Metal' });
 
-      
-        const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-        if (fileInput) fileInput.value = '';
-      });
-    } else {
-      
-      this.discosService.updateDisco(this.idEditando, discoData).subscribe(() => {
-        this.getAllDiscos();
-        this.idEditando = null;
-        this.discoForm.reset({ estilo: 'Thrash Metal' });
+      const blobToSend = this.fileBlob ? this.fileBlob : new Blob();
 
-     
-        const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-        if (fileInput) fileInput.value = '';
+      this.discosService.createDisco(discoData, blobToSend)
+        .subscribe(() => {
+          this.getAllDiscos();
+          this.resetForm();
+        });
+
+    }
+
+    
+    else {
+
+      this.discosService.updateDisco(
+        this.idEditando,
+        discoData,
+        this.fileBlob,
+        this.discoForm.value.filenameOriginal
+      ).subscribe(() => {
+        this.getAllDiscos();
+        this.resetForm();
       });
     }
   }
 
   editarDisco(d: any) {
     this.idEditando = d.id;
-    this.discoForm.patchValue(d);
+    this.filenameOriginal = d.filename;
 
-    
+    this.discoForm.patchValue({
+      brand: d.brand,
+      model: d.model,
+      estilo: d.estilo,
+      filenameOriginal: d.filename
+    });
+  }
+
+  resetForm() {
+    this.idEditando = null;
+    this.fileBlob = null;
+
+    this.discoForm.reset({ estilo: "Thrash Metal" });
+
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    if (fileInput) {
-      const dataTransfer = new DataTransfer();
-      const fakeFile = new File([], d.portada);
-      dataTransfer.items.add(fakeFile);
-      fileInput.files = dataTransfer.files;
-    }
+    if (fileInput) fileInput.value = '';
   }
 
-  
   deleteDisco(id: any) {
-    this.discosService.deleteDisco(id).subscribe(() => this.getAllDiscos());
+    this.discosService.deleteDisco(id)
+      .subscribe(() => this.getAllDiscos());
   }
-
 
   volverInicio() {
     this.router.navigate(['/home']);
