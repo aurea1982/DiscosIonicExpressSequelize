@@ -1,0 +1,59 @@
+<!-- en todas mis vistas he usado ion-content para que parezca un formato de movil-->
+
+<ion-content class="home-bg">
+
+  <div class="contenedor-principal">
+
+    <ion-card class="card-lista">
+
+      <!--vale en el card cabecera tenemos la lista de los discos entero-->
+      <ion-card-header>
+        <ion-card-title class="titulo-card">Lista de Discos</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-list>
+          <!-- me permite cargar todos los discos que tengo en mi BD-->
+          <ion-item *ngFor="let d of discos">
+            <!--vale esto fue un follon porque emplee el upload como foto de portada -->
+            <!--me permite usar esas imagenes guardadas en la carpeta images para que aparezca como portada -->
+            <ion-avatar slot="start">
+              <img
+                *ngIf="d.filename"
+                src="http://localhost:8080/images/{{ d.filename }}"
+                alt="portada"
+              />
+            </ion-avatar>
+            <!--hace que aparezcan el resto de los datos del disco-->
+            <ion-label>
+              <h2>{{ d.brand }}</h2>
+              <p>{{ d.model }}</p>
+              <p>{{ d.estilo }}</p>
+            </ion-label>
+
+          </ion-item>
+
+        </ion-list>
+
+       <!--boton de inicio que vuelve a la vista home-->
+        <div class="volver-contenedor">
+          <ion-button class="btn-metal" expand="block" (click)="volverInicio()">
+            VOLVER AL INICIO
+          </ion-button>
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+ <!--boton + que me lleva a la vista add-discos-->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="fab-add" (click)="addDisco()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

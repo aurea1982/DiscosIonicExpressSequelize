@@ -1,0 +1,201 @@
+// importa la letra que decidi usar Metal Mania
+
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+
+// fondo de la pagina general
+.home-bg {
+  --background: #1b1b1b;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  padding-top: 20px;
+}
+
+// mantiene el card en el centro
+.contenedor-principal {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+}
+
+// da forma al card que me permite darle forma de movil para pasar al android
+ion-card.card-contenedor {
+  --background: #2e2e2e;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+  margin: 20px auto;
+}
+
+// formato del titulo
+.titulo-header {
+  font-family: 'Metal Mania', cursive;
+  font-size: 26px;
+  color: #d6d6d6;
+  text-align: center;
+}
+
+// formato del formulario
+ion-item {
+  --background: #2e2e2e;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  color: #d6d6d6;
+}
+
+// formato boton guardar
+.guardar-btn {
+  display: block;
+  margin: 16px auto;
+  width: 80%;
+  --background: #000;
+  --color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  box-shadow: 0 3px 8px rgba(255, 255, 255, 0.1);
+  transition: none !important; // le quita el hacerse grande u otra transicion que no me gusta
+  transform: none !important;
+}
+
+.guardar-btn:hover,
+.guardar-btn:active,
+.guardar-btn:focus {
+  transform: none !important;
+  background: #000 !important;
+}
+
+// formato del listado de todos los discos
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+// le da formato a como se muestran los datos de los discos
+// portada (upload), nombre, autor y estilo
+.item-disco {
+  --background: #2e2e2e;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+// formato de la imagen del disco
+ion-thumbnail img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+// muestra todos los datos del disco y aqui indico como es su ubicacion y su formato
+.disc-brand {
+  font-family: 'Metal Mania', cursive;
+  font-size: 16px;
+  color: #fff;
+}
+
+.disc-model {
+  font-size: 13px;
+  color: #aaa;
+}
+
+// formato de boton editar y borrar
+.btn-action {
+  --background: #000;
+  --color: #fff;
+  font-size: 12px;
+  height: 26px;
+  border-radius: 4px;
+  margin-left: 6px;
+  transition: none !important;
+  transform: none !important;
+}
+
+.btn-action:hover,
+.btn-action:active,
+.btn-action:focus {
+  transform: none !important;
+  background: #000 !important;
+}
+
+
+.stats-bottom {
+  margin-top: 20px;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.row-stats {
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.stats-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+}
+
+.stats-col ion-icon,
+.stats-col div {
+  color: #000000 !important;   
+  font-weight: bold;
+}
+
+.stats-col ion-icon {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+// boton volver 
+.volver-btn {
+  --background: #000;
+  --color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 6px 24px;
+  margin-top: 10px;
+  box-shadow: none;
+  text-transform: uppercase;
+  transition: none !important;
+  transform: none !important;
+}
+
+.volver-btn:hover,
+.volver-btn:active,
+.volver-btn:focus {
+  transform: none !important;
+  background: #000 !important;
+}
+
+
+
+ion-button::part(native) {
+  transform: none !important;
+  transition: none !important;
+}
+
+ion-button:hover::part(native),
+ion-button:active::part(native),
+ion-button:focus::part(native) {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+ion-button.volver-btn::part(native) {
+  background: #000 !important;
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}

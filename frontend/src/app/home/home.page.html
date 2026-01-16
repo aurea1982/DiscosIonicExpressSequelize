@@ -1,0 +1,59 @@
+<!--este tipo de estructura es la general de ionic, empleo un contenedor principal para el contenido de la pagina, y emprelo el css para el fondo-->
+<ion-content class="home-bg">
+
+  <!--esto es el contenedor principal conde voy a aplicar los estilos-->
+  <div class="contenedor-principal">
+
+    <!-- Card principal con estilos -->
+    <ion-card class="card-contenedor">
+
+      <!-- Título -->
+      <ion-card-header>
+        <ion-card-title class="titulo-header">Inicio</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <div class="contenedor-central">
+
+          <h1 class="titulo">TIENDA DISCOS HEAVY</h1>
+
+          <!-- Imagen -->
+          <img src="assets/imagenes/heavy.jpg" class="imagen-vinilo">
+
+          <!-- Botones estilos -->
+          <ion-button class="btn-metal" expand="block" routerLink="/heavy-clasico">
+            HEAVY CLÁSICO
+          </ion-button>
+
+          <ion-button class="btn-metal" expand="block" routerLink="/black-metal">
+            BLACK METAL
+          </ion-button>
+
+          <ion-button class="btn-metal" expand="block" routerLink="/death-metal">
+            DEATH METAL
+          </ion-button>
+
+          <ion-button class="btn-metal" expand="block" routerLink="/thrash-metal">
+            THRASH METAL
+          </ion-button>
+
+          <ion-button class="btn-metal" expand="block" routerLink="/doom-metal">
+            DOOM METAL
+          </ion-button>
+
+          <!-- boton que lleva a list-discos-->
+          <ion-button class="btn-metal" expand="block" routerLink="/list-discos">
+            <ion-icon slot="start" name="camera"></ion-icon>
+            SACAR FOTOS
+          </ion-button>
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
+</ion-content>

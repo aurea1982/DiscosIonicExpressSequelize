@@ -1,0 +1,132 @@
+// importe este tipo de letra
+
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+
+// fondo de la pagina
+// permite que se vaya haciendo mas grande de forma vertical al ir metiendole datos
+.home-bg {
+  --background: #2b2b2b;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// le da estilo al contenedor principal es decir que lo centra
+.contenedor-principal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+// da forma de movil para luego enviar a android y se vea bien
+.card-lista {
+  --background: #bfbfbf;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 420px;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(255, 0, 0, 0.4);
+}
+
+
+.card-lista ion-card-header {
+  background: #bfbfbf;
+  border-bottom: 2px solid #8b0000;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 12px;
+}
+
+.titulo-card {
+  font-family: 'Metal Mania', cursive;
+  font-size: 22px;
+  color: #b30000;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+// quita el fondo blanco no me gustaba
+ion-list {
+  background: transparent;
+  margin-top: 10px;
+}
+
+ion-item {
+  --background: transparent;
+  border-bottom: 1px solid rgba(139, 0, 0, 0.25);
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+// le da formato a la imagen
+ion-avatar img {
+  border-radius: 6px;
+  border: 2px solid #8b0000;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+ion-item h2 {
+  font-family: 'Metal Mania', cursive;
+  font-size: 18px;
+  color: #8b0000;
+}
+
+ion-item p {
+  color: #333;
+  font-size: 14px;
+  margin: 0;
+}
+
+// formato al boton volver
+.btn-metal {
+  --background: #8b0000 !important;
+  --color: white !important;
+  border-radius: 10px;
+  margin-top: 16px;
+  font-family: 'Metal Mania', cursive;
+  letter-spacing: 1px;
+  width: 100%;
+
+
+  transform: none !important;
+  transition: none !important;
+}
+
+
+.btn-metal:hover {
+  filter: brightness(1.05); 
+  transform: none !important;
+}
+
+// formato al +
+.fab-add {
+  --background: #8b0000 !important;
+  --color: white !important;
+  box-shadow: 0 4px 14px rgba(255, 0, 0, 0.5);
+
+  transform: none !important;
+  transition: none !important;
+}
+
+// le quita los efecto el transform le quita el hacerse grande y otros efectos de los botones que no me gustaba
+.fab-add:hover {
+  transform: none !important;
+}
+
+
+ion-button::part(native),
+ion-fab-button::part(native) {
+  transform: none !important;
+  transition: none !important;
+}
+
+ion-button:hover::part(native),
+ion-fab-button:hover::part(native) {
+  transform: none !important;
+}
